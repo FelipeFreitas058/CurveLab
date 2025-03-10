@@ -4,8 +4,8 @@ CurveLab é uma interface gráfica para a criação e personalização de gráfi
 
 ## 📥 Instalação
 ### 1️⃣ Pré-requisitos
-1. Python: (Baixe em: [python.org/downloads](https://www.python.org/downloads/)).
-2. Bibliotecas Necessárias: Instale com o comando
+  - Python: (Baixe em: [python.org/downloads](https://www.python.org/downloads/)).
+  - Bibliotecas Necessárias: Instale com o comando
   ```pip install PyQt6 matplotlib openpyxl numpy pandas```.
 
 ### 2️⃣ Executando o CurveLab
@@ -16,16 +16,16 @@ Após a instalação das bibliotecas, basta abrir o aplicativo CurveLab.exe para
 A interface permite importar dados de diferentes fontes para gerar os gráficos:
 
 ✔️ Planilhas (.xlsx, .csv)
-1. Acesse "Seleção de dados" > "Planilha".
-2. Clique em "Carregar planilha" e selecione o arquivo.
-3. Selecione os dados da variável, nomeie-a e clique em "Importar variável".
+  - Acesse "Seleção de dados" > "Planilha".
+  - Clique em "Carregar planilha" e selecione o arquivo.
+  - Selecione os dados da variável, nomeie-a e clique em "Importar variável".
 
 ✔️ Código Python
 
-1. Vá em "Seleção de dados" > "Código".
-2. Digite ou cole um código Python e clique em "Executar código".
-3. As variáveis detectadas aparecerão na lista para importação.
-4. Selecione quais variáveis serão utilizadas no gráfico e clique em "Importar variáveis".
+  - Vá em "Seleção de dados" > "Código".
+  - Digite ou cole um código Python e clique em "Executar código".
+  - As variáveis detectadas aparecerão na lista para importação.
+  - Selecione quais variáveis serão utilizadas no gráfico e clique em "Importar variáveis".
 
 ✔️ Arquivos de Texto (.txt)
 
