@@ -95,7 +95,7 @@ Após a instalação das bibliotecas, basta abrir o aplicativo CurveLab.exe para
 📌Para exportar o gráfico, basta copiar o .png do mesmo clicando em "Copiar gráfico", ou clique em "Exportar gráfico" para mais formatos 📂.
 
 
-### 💾 Predefinições
+## 💾 Predefinições
 📌A interface permite salvar predefinições de um gráfico, permitindo a utilização das mesmas configurações de forma facil e prática 🚀.
 
 
