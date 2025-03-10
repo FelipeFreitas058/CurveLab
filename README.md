@@ -11,6 +11,7 @@ CurveLab é uma interface gráfica para a criação e personalização de gráfi
 ### 2️⃣ Executando o CurveLab
 Após a instalação das bibliotecas, basta abrir o aplicativo CurveLab.exe para iniciar a interface gráfica.
 
+
 ## 📊 Como Usar?
 ### 🔹 Importação de Dados
 📌A interface permite importar dados de diferentes fontes para gerar os gráficos:
@@ -34,6 +35,7 @@ Após a instalação das bibliotecas, basta abrir o aplicativo CurveLab.exe para
   - Clique em "Gerar planilha", confira os dados da planilha e importe-a.
   - A planilha importada estará em "Seleção de dados" > "Planilha".
 
+
 ### 🔹 Criação de curvas
 📌Para criar as curvas que irão compor o gráfico, siga os seguintes passos:
   - Vá em "Construção do gráfico" -> "Criar curvas".
@@ -43,24 +45,29 @@ Após a instalação das bibliotecas, basta abrir o aplicativo CurveLab.exe para
   - Altere o índice como preferir (mais detalhes posteriormente no **detalhamento de predefinições**).
   - Ative a curva caso queira que apareça no gráfico ✅.
 
+
 ### 📈 Gerar gráfico
 📌Para gerar o gráfico, basta seguir os seguintes passos:
   - Após criado as curvas, vá em "Construção do gráfico" -> "Gerar gráfico".
   - Altere as configurações iniciais do gráfico na lateral direita da aba ⚙️.
   - Clique em "Gerar gráfico" 📊.
 
+
 ### 🎨 Personalização do gráfico
 📌Após gerado o gráfico, é possível personalizar as mais diferentes características do mesmo:
+
 
 ✔️ Curvas
   - Vá em "Personalização" -> "Curvas".
   - Selecione a curva que se deseja personalizar.
   - Altere os mais diversos parâmetros disponíveis 🛠️.
 
+
 🏷️ Títulos
   - Vá em "Personalização" -> "Títulos"
   - Escolha qual dos títulos se deseja personalizar 🏷️.
   - Modifique os parâmetros conforme necessário ✏️.
+
 
 📜 Legenda
   - Vá em "Personalização" -> "Legendas".
@@ -73,19 +80,24 @@ Após a instalação das bibliotecas, basta abrir o aplicativo CurveLab.exe para
   - Escolha "Caixa da legenda".
       - Modifique os parâmetros da borda e fundo da legenda 🎨.
 
+
 📏 Grades
   - Ative a grade principal e secundária 📊.
   - Altere os parâmetros das mesmas conforme desejado 📐.
+
 
 🖼️ Bordas
   - Ative ou desative as bordas do gráfico separadamente 🖼️.
   - Altere os parâmetros de cada borda conforme desejado 🎨.
 
+
 ### 📤 Exportação do Gráfico
 📌Para exportar o gráfico, basta copiar o .png do mesmo clicando em "Copiar gráfico", ou clique em "Exportar gráfico" para mais formatos 📂.
 
+
 ### 💾 Predefinições
 📌A interface permite salvar predefinições de um gráfico, permitindo a utilização das mesmas configurações de forma facil e prática 🚀.
+
 
 #### 🔹 Salvando predefinições
 📌 A personalização de cada curva será associada ao índice dela, sendo esse índice utilizado ao carregar uma predefinição.
@@ -94,6 +106,7 @@ Após a instalação das bibliotecas, basta abrir o aplicativo CurveLab.exe para
   - Digite um nome para a predefinição e clique em "Salvar" 💾.
   - Em "Utilizar predefinição", confira se a predefinição salva consta na caixa de listagem abaixo de "Usar predefinição" 📜.
   - Caso deseje excluir a predefinição, selecione na caixa de listagem abaixo de "Usar predefinição" e clique em "Excluir predefinição" ❌.
+
 
 #### 🔹 Utilizando predefinições
 📌Para utilizar uma predefinição salva, siga os passos à seguir:
