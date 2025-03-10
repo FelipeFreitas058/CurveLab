@@ -4,9 +4,9 @@ CurveLab é uma interface gráfica para a criação e personalização de gráfi
 
 ## 📥 Instalação
 ### 1️⃣ Pré-requisitos
-1. Python: (Baixe em: python.org/downloads)
-2. Bibliotecas Necessárias (instale com o comando abaixo):]
-  `pip install PyQt6 matplotlib openpyxl numpy pandas`
+1. Python: (Baixe em: [python.org/downloads])
+2. Bibliotecas Necessárias (instale com o comando abaixo):
+  ```pip install PyQt6 matplotlib openpyxl numpy pandas```
 
 ### 2️⃣ Executando o CurveLab
 Após a instalação das bibliotecas, basta abrir o aplicativo CurveLab.exe para iniciar a interface gráfica.
