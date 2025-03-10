@@ -99,7 +99,7 @@ Após a instalação das bibliotecas, basta abrir o aplicativo CurveLab.exe para
 📌A interface permite salvar predefinições de um gráfico, permitindo a utilização das mesmas configurações de forma facil e prática 🚀.
 
 
-#### 🔹 Salvando predefinições
+### 🔹 Salvando predefinições
 📌 A personalização de cada curva será associada ao índice dela, sendo esse índice utilizado ao carregar uma predefinição.
 📌 Nomeie os índices de forma clara para facilitar o uso futuro.
   - Vá em "Personalização" -> "Predefinições".
@@ -108,7 +108,7 @@ Após a instalação das bibliotecas, basta abrir o aplicativo CurveLab.exe para
   - Caso deseje excluir a predefinição, selecione na caixa de listagem abaixo de "Usar predefinição" e clique em "Excluir predefinição" ❌.
 
 
-#### 🔹 Utilizando predefinições
+### 🔹 Utilizando predefinições
 📌Para utilizar uma predefinição salva, siga os passos à seguir:
   - Selecione a predefinição desejada na caixa de listagem abaixo de "Usar predefinição".
   - Ative a opção "Usar predefinição". Ao ativar, a interface entrará em modo de predefinição, onde não é possível personalizar nenhuma característica do gráfico.
