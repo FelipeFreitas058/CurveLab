@@ -1506,11 +1506,18 @@ class Funcao:
     def tem_caracteres(self, lista):
         if not isinstance(lista, (list, tuple)):
             lista = [lista]
-        try:
-            [float(x) for x in lista]
-            return False
-        except ValueError:
-            return True 
+        
+        for x in lista:
+            if isinstance(x, (np.ndarray, list, tuple)):
+                if len(x) == 1:
+                    x = x[0]
+                else:
+                    continue
+            try:
+                float(x)
+            except ValueError:
+                return True
+        return False
 
     def Mostrar_Curvas_Legenda(self, state):
         if state == 2:
