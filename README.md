@@ -1,6 +1,7 @@
 # CurveLab🎨📈
 
-CurveLab é uma interface gráfica para a criação e personalização de gráficos cartesianos de forma simples e eficiente.
+CurveLab é uma interface gráfica dedicada à criação e personalização de gráficos cartesianos de forma simples e eficiente.
+Através do CurveLab você pode importar dados de diferentes fontes, gerar seus gráficos e personaliza-los como preferir, refinando-os ao nível de publicação!
 
 ## 📥 Instalação
 ### 1️⃣ Pré-requisitos
