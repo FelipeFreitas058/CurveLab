@@ -12,6 +12,8 @@ import matplotlib.font_manager as fm
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 import pandas as pd
+import sympy as sp
+from sympy import symbols, sympify, latex, log
 from PyQt6 import QtWidgets
 from PyQt6.QtGui import QImage, QPixmap
 from PyQt6.QtCore import Qt, QTimer
@@ -206,6 +208,8 @@ class Funcao:
         self.Fontes_Disponiveis = set(f.name for f in fm.fontManager.ttflist)
         self.nome_curva = []
         self.nome_curva2 = []
+
+        self.expressao = None
 
         self.toolbar = None
         self.parametro = 0
@@ -1577,7 +1581,6 @@ class Funcao:
                     msg_box.close()
                     return
                 
-
             Valor_Var = self.Lista_Variaveis_Codigo.get(Nome_Var)
 
             self.ui.ListW_Listas_Var_Importadas.addItem(Nome_Var)
@@ -1741,6 +1744,108 @@ class Funcao:
         for row in range(self.data.shape[0]):
             for col in range(self.data.shape[1]):
                 self.ui.TW_Local_Tabela.setItem(row, col, QTableWidgetItem(str(self.data.iloc[row, col])))
+
+    def Mostra_Equacao(self):
+        Texto = self.ui.Local_Equacao.toPlainText()
+        if Texto:
+            try:
+                Texto = Texto.replace("ln", "log")
+                Texto = Texto.replace("e", "E")
+                Texto = re.sub(r'(?<![a-zA-Z0-9])i(?![a-zA-Z0-9])', "1j", Texto)
+                Texto = Texto.replace("1j", "I")
+                self.expressao = sympify(Texto)
+                equation_latex = latex(self.expressao)
+
+                if "log" in equation_latex:
+                    equation_latex = equation_latex.replace("log", "ln")
+
+                plt.figure(figsize=(4, 1))
+                plt.text(0.5, 0.5, f"${equation_latex}$", fontsize=14, ha='center', va='center')
+                plt.axis("off")
+
+                plt.savefig("equacao.png", transparent=True, bbox_inches='tight', pad_inches=0.2)
+                plt.close()
+
+                self.ui.equation_label.setPixmap(QPixmap("equacao.png"))
+
+            except Exception as e:
+                self.ui.equation_label.setText(f"Erro: {e}")
+
+    def Importar_Equacao(self):
+        equacao = None
+        x = sp.symbols('x')
+
+        variaveis_permitidas = {"x", "E", "pi", "I"}
+        variaveis_expressao = {str(var) for var in self.expressao.free_symbols}
+
+        variaveis_invalidas = variaveis_expressao - variaveis_permitidas
+        if variaveis_invalidas:
+            QMessageBox.critical(self.interface, "Erro", f"Variáveis inválidas detectadas: {', '.join(variaveis_invalidas)}")
+            return
+
+        if self.expressao != None:
+            try:
+                equacao = sp.lambdify(x, self.expressao, 'numpy')
+            except Exception as e:
+                QMessageBox.critical(self.interface, "Erro", f"Erro ao converter equação: {e}")
+                return
+        
+        lim_inf = self.ui.LE_Lim_Inf_X_Funcao.text()
+        lim_sup = self.ui.LE_Lim_Sup_X_Funcao.text()
+        numero_pontos = self.ui.LE_Numero_Pontos.text()
+        try:
+            lim_inf = float(lim_inf)
+        except:
+            QMessageBox.critical(self.interface, "Erro", f"Limite inferior inválido!")
+            return
+        try:
+            lim_sup = float(lim_sup)
+        except:
+            QMessageBox.critical(self.interface, "Erro", f"Limite superior inválido!")
+            return
+        try:
+            numero_pontos = int(numero_pontos)
+        except:
+            QMessageBox.critical(self.interface, "Erro", f"Número de pontos inválido!")
+            return
+        
+        
+        Valores_X = np.linspace(lim_inf, lim_sup, numero_pontos)
+        try:
+            Valores_Y = equacao(Valores_X)
+        except Exception as e:
+            QMessageBox.critical(self.interface, "Erro", f"Erro ao calcular y(x): {e}")
+            return
+        Nome_Var_X = self.ui.LE_Nome_Var_X.text()
+        Nome_Var_Y = self.ui.LE_Nome_Var_Y.text()
+            
+        if Nome_Var_X in self.Lista_Variaveis or Nome_Var_Y in self.Lista_Variaveis:
+            msg_box = QMessageBox()
+            msg_box.setWindowTitle("Atenção")
+            msg_box.setText("Uma das variáveis já existe. \n Deseja substituí-la?")
+            msg_box.setIcon(QMessageBox.Icon.Warning)
+            substituir_btn = msg_box.addButton("Substituir", QMessageBox.ButtonRole.AcceptRole)
+            cancelar_btn = msg_box.addButton("Cancelar", QMessageBox.ButtonRole.RejectRole)
+            msg_box.exec()
+
+            if msg_box.clickedButton() == substituir_btn:
+                if Nome_Var_X in self.Lista_Variaveis:
+                    self.Lista_Variaveis[Nome_Var_X] = Valores_X
+                if Nome_Var_Y in self.Lista_Variaveis:
+                    self.Lista_Variaveis[Nome_Var_Y] = Valores_Y
+            elif msg_box.clickedButton() == cancelar_btn:
+                msg_box.close()
+                return
+        else:
+            self.Lista_Variaveis[Nome_Var_X] = Valores_X
+            self.Lista_Variaveis[Nome_Var_Y] = Valores_Y
+            self.ui.ListW_Listas_Var_Importadas.addItem(Nome_Var_X)
+            self.ui.ListW_Listas_Var_Importadas.addItem(Nome_Var_Y)
+        
+            
+        self.Atualizar_Variaveis_Disponiveis()
+        self.ui.statusbar.showMessage("Variáveis importadas com sucesso!", 3000)
+        self.Inicia_Timer(3000)
 
     def Mudar_Aba_Parametro_Legenda(self, index):
         self.Mudar_Aba_Personalizacao(2)

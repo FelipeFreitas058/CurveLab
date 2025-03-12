@@ -30,6 +30,10 @@ class MeuApp(QMainWindow):
         self.ui.B_Abrir_A_Txt.clicked.connect(self.f.Carrega_Arquivo_Texto)
         self.ui.B_Gerar_Planilha_A_Txt.clicked.connect(self.f.Gerar_Planilha)
 
+        # Aba Equação
+        self.ui.Local_Equacao.textChanged.connect(self.f.Mostra_Equacao)
+        self.ui.B_Importar_Equacao.clicked.connect(self.f.Importar_Equacao)
+
         # Aba Criação de curvas
         self.ui.B_Add_Curva.clicked.connect(self.f.Adicionar_Curva)
         self.ui.B_Excluir_Variavel.clicked.connect(self.f.Excluir_Variavel)
@@ -44,7 +48,7 @@ class MeuApp(QMainWindow):
         self.ui.actionCriacao_Curvas.triggered.connect(lambda: self.f.Mudar_Aba_Principal(3))
         self.ui.actionConstrucao_Grafico.triggered.connect(lambda: self.f.Mudar_Aba_Principal(4))
         self.ui.actionArquivo_Texto.triggered.connect(lambda: self.f.Mudar_Aba_Principal(6))
-        # self.ui.actionExportar.triggered.connect(lambda: self.f.Mudar_Aba_Principal(0))
+        self.ui.actionFuncao.triggered.connect(lambda: self.f.Mudar_Aba_Principal(7))
         self.ui.actionCurvas.triggered.connect(lambda: self.f.Mudar_Aba_Personalizacao(0))
         self.ui.actionTitulos.triggered.connect(lambda: self.f.Mudar_Aba_Personalizacao(1))
         self.ui.actionLegendas.triggered.connect(lambda: self.f.Mudar_Aba_Personalizacao(2))
