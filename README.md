@@ -35,6 +35,12 @@ Após a instalação das bibliotecas, basta abrir o aplicativo CurveLab.exe para
   - Clique em "Gerar planilha", confira os dados da planilha e importe-a.
   - A planilha importada estará em "Seleção de dados" > "Planilha".
 
+✔️ Função y(x)
+
+  - Vá em "Seleção de dados" -> "Equação".
+  - Digite os limites da variável x e o numero de pontos que irão compor a curva.
+  - Digite a equação e vizualize-a na parte inferior da interface.
+  - Nomeie as variáveis X e Y que irão conter os dados para formar a curva e importe-as.
 
 ### 🔹 Criação de curvas
 📌Para criar as curvas que irão compor o gráfico, siga os seguintes passos:
