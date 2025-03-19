@@ -14,6 +14,8 @@ from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as Navigatio
 import pandas as pd
 import sympy as sp
 from sympy import symbols, sympify, latex, log
+from scipy.signal import medfilt, savgol_filter
+from scipy.ndimage import gaussian_filter1d
 from PyQt6 import QtWidgets
 from PyQt6.QtGui import QImage, QPixmap
 from PyQt6.QtCore import Qt, QTimer
@@ -203,6 +205,7 @@ class Funcao:
         self.canvas_P = None
         self.Lista_Curvas_Plotadas = {}
         self.Lista_Curvas_Predef = {}
+        self.y_data_Original = {}
         self.legenda = None
 
         self.Fontes_Disponiveis = set(f.name for f in fm.fontManager.ttflist)
@@ -264,7 +267,6 @@ class Funcao:
             self.Dicionario_Global["Curvas"][Nome_Curva]["Espessura"] = valor
             self.canvas_P.draw_idle()
             
-            
         if parametro == "Estilo" and self.ui.CB_Visibilidade_Curva.isChecked():
             valor2 = ''
             if valor == "Linha sólida":
@@ -281,7 +283,32 @@ class Funcao:
             Curva.set(ls=valor2)
             self.Dicionario_Global["Curvas"][Nome_Curva]["Estilo"] = valor
             self.canvas_P.draw_idle()
-            
+
+        if parametro == "Filtro":
+            if self.ui.CB_Ativar_Filtro.isChecked():
+                Filtro = self.ui.CombB_Tipo_Filtro.currentText()
+                try:
+                    y_data = self.y_data_Original[Nome_Curva]    
+                    if Filtro == "Filtro da Média móvel":
+                        y_data = np.convolve(y_data, np.ones(int(valor))/int(valor), mode='same')
+                    elif Filtro == "Filtro da Mediana":
+                        if int(valor) % 2 == 0:
+                            valor += 1
+                        y_data = medfilt(y_data, kernel_size=int(valor))
+                    elif Filtro == "Filtro Gaussiano":
+                        y_data = gaussian_filter1d(y_data, valor)
+                    elif Filtro == "Filtro de Savitzky-Golay":
+                        y_data = savgol_filter(y_data, int(valor), 2)
+
+                    Curva.set_ydata(y_data)
+                    self.canvas_P.draw_idle()
+                except Exception as e:
+                    QMessageBox.critical(self.interface, "Erro", f"Erro ao tentar aplicar filtro: {e}")
+                    return
+            else:
+                Curva.set_ydata(self.y_data_Original[Nome_Curva])
+                self.canvas_P.draw_idle()
+
         if parametro == "Transparencia":
             valor2 = valor/100
             Curva.set_alpha(valor2)
@@ -1444,6 +1471,7 @@ class Funcao:
                     QMessageBox.critical(self.interface, "Erro", f"Há caracteres na variável Y da curva {Nome_Curva}.")
                 try:
                     self.Lista_Curvas_Plotadas[Nome_Curva], = self.ax.plot(Dados_X, Dados_Y, label=Nome_Curva)
+                    self.y_data_Original[Nome_Curva] = Dados_Y
                     self.ui.CombB_Selecionar_Curva.addItem(Nome_Curva)
                     self.ui.CombB_Selecionar_Curva_Legenda.addItem(Nome_Curva)
                     self.Adicionar_Curva_Plotada(Curva.Box_Modelo.title())
@@ -1880,7 +1908,27 @@ class Funcao:
                     Curva.CombB_Variavel_X_Curva.addItem(Variavel)
                 if Curva.CombB_Variavel_Y_Curva.findText(Variavel) == -1:
                     Curva.CombB_Variavel_Y_Curva.addItem(Variavel)                
-                
+
+    def Alterar_valor_Filtro(self):
+        Filtro = self.ui.CombB_Tipo_Filtro.currentText()
+        if Filtro == "Filtro da Média móvel":
+            self.ui.SB_Parametro_Filtro.setValue(3)
+            self.ui.SB_Parametro_Filtro.setMinimum(3)
+            self.ui.SB_Parametro_Filtro.setMaximum(51)
+        elif Filtro == "Filtro da Mediana":
+            self.ui.SB_Parametro_Filtro.setValue(3)
+            self.ui.SB_Parametro_Filtro.setMinimum(3)
+            self.ui.SB_Parametro_Filtro.setMaximum(51)
+        elif Filtro == "Filtro Gaussiano":
+            self.ui.SB_Parametro_Filtro.setValue(0.1)
+            self.ui.SB_Parametro_Filtro.setMinimum(0.1)
+            self.ui.SB_Parametro_Filtro.setMaximum(10)
+        elif Filtro == "Filtro de Savitzky-Golay":
+            self.ui.SB_Parametro_Filtro.setValue(5)
+            self.ui.SB_Parametro_Filtro.setMinimum(5)
+            self.ui.SB_Parametro_Filtro.setMaximum(51)
+
+
 ###########################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ###########################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 ###########################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
