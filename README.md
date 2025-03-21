@@ -67,7 +67,7 @@ Após a instalação das bibliotecas, basta abrir o aplicativo CurveLab.exe para
 ✔️ Curvas
   - Vá em "Personalização" -> "Curvas".
   - Selecione a curva que se deseja personalizar.
-  - Altere os mais diversos parâmetros disponíveis 🛠️.
+  - Altere os mais diversos parâmetros disponíveis ou suavize suas curvas conforme preferir 🛠️.
 
 
 🏷️ Títulos
