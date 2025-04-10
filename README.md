@@ -7,7 +7,7 @@ Através do CurveLab você pode importar dados de diferentes fontes, gerar seus 
 ### 1️⃣ Pré-requisitos
   - Python: (Baixe em: [python.org/downloads](https://www.python.org/downloads/)).
   - Bibliotecas Necessárias: Instale com o comando
-  ```pip install PyQt6 matplotlib openpyxl numpy pandas```.
+  ```pip install PyQt6 matplotlib openpyxl numpy pandas sympy scipy```.
 
 ### 2️⃣ Executando o CurveLab
 Após a instalação das bibliotecas, basta abrir o aplicativo CurveLab.exe para iniciar a interface gráfica.
